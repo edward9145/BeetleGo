@@ -4,6 +4,7 @@ import game.edw.beetlego.data.RankScore;
 import game.edw.beetlego.data.Storage;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -29,11 +30,16 @@ public class GameOverFrame extends Activity {
         setContentView(R.layout.gameover);
         
         llName = (LinearLayout)findViewById(R.id.llOverNmae);
+        
+        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Bradley Hand ITC.TTF");
         etOverName = (EditText)findViewById(R.id.etOverName);
         etOverName.setText(C.LAST_NAME);
+        etOverName.setTypeface(typeFace, Typeface.BOLD);
+        
         tvScore = (TextView)findViewById(R.id.tvScore);
         C.score *= 10;
         tvScore.setText(C.score + "");
+        tvScore.setTypeface(typeFace, Typeface.BOLD);
         
         rankScore = Storage.loadScore(this);
         int result = rankScore.testRank(C.score);

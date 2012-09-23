@@ -5,6 +5,7 @@ import game.edw.beetlego.R;
 import game.edw.beetlego.data.RankScore;
 import game.edw.beetlego.data.Storage;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -26,9 +27,14 @@ public class TopRankFrame extends Activity {
         setContentView(R.layout.toprank);
         rankScore = Storage.loadScore(this);
         
+        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Bradley Hand ITC.TTF");
+        
         for(int i=0; i<C.RANK_NUM; i++){
         	tvScores[i] = (TextView)findViewById(R.id.tvTopScore1 + i*2);
         	tvNames[i] = (TextView)findViewById(R.id.tvTopName1 + i*2);
+        	
+        	tvScores[i].setTypeface(typeFace, Typeface.BOLD);
+        	tvNames[i].setTypeface(typeFace, Typeface.BOLD);
         	
         	tvScores[i].setText(String.format("%06d", rankScore.getScore(i)));
         	tvNames[i].setText(rankScore.getName(i));
