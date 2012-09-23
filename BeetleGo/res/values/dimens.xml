@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="margin">10dp</dimen>
+	<dimen name="footer_margin">8dp</dimen>
+	
+	<dimen name="menu_btn_h">58dp</dimen>
+	
+	<dimen name="load_margin">40dp</dimen>
+	<dimen name="load_margin_b">50dp</dimen>	
+	<dimen name="loading_margin">100dp</dimen>
+	<dimen name="loading_margin_t">20dp</dimen>	
+	
+	<dimen name="select_mtb">50dp</dimen>	
+	<dimen name="select_mlr">65dp</dimen>
+	
+	<dimen name="selectmode_mt">15dp</dimen>	
+	<dimen name="selectmode_mb">40dp</dimen>
+	
+	<dimen name="toprank_fontsize">25sp</dimen>
+</resources>

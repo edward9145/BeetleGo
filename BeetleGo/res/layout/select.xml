@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/menu_bg"
+    >
+    <LinearLayout 
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+    	android:layout_gravity="center"
+    	android:orientation="vertical"
+    	android:layout_marginTop="@dimen/select_mtb"
+    	android:layout_marginBottom="@dimen/select_mtb"
+    	android:layout_marginLeft="@dimen/select_mlr"
+    	android:layout_marginRight="@dimen/select_mlr"
+    	>
+    	<LinearLayout 
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="fill_parent"
+	    	android:layout_gravity="center"
+	    	android:orientation="horizontal"
+	    	android:layout_weight="1"
+	    	>
+			<ImageButton
+				android:id="@+id/ibStage1"
+				android:onClick="stage1_onclick"
+				android:layout_width="fill_parent"
+		    	android:layout_height="fill_parent"
+		    	android:layout_weight="2"
+		    	android:background="@drawable/btn_stage1"
+		    	/>
+		    <ImageButton
+		    	android:id="@+id/ibStage2"
+				android:onClick="stage2_onclick"
+				android:layout_width="fill_parent"
+		    	android:layout_height="fill_parent"
+		    	android:layout_weight="2"
+		    	android:background="@drawable/btn_stage2"
+		    	/>
+		    <ImageButton
+		    	android:id="@+id/ibStage3"
+		    	android:onClick="stage3_onclick"
+				android:layout_width="fill_parent"
+		    	android:layout_height="fill_parent"
+		    	android:layout_weight="2"
+		    	android:background="@drawable/stage_3_bw"
+		    	/>
+    	</LinearLayout>	<!-- android:scaleType="fitCenter" android:src="@drawable/lock" -->
+    	
+    	<LinearLayout 
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="fill_parent"
+	    	android:layout_gravity="center"
+	    	android:orientation="horizontal"
+	    	android:layout_weight="1"
+	    	>
+			<ImageButton
+				android:id="@+id/ibStage4"
+		    	android:onClick="stage4_onclick"
+				android:layout_width="fill_parent"
+		    	android:layout_height="fill_parent"
+		    	android:layout_weight="2"
+		    	android:background="@drawable/stage_4_bw"
+		    	/>
+		    <ImageButton
+		    	android:id="@+id/ibStage5"
+		    	android:onClick="stage5_onclick"
+				android:layout_width="fill_parent"
+		    	android:layout_height="fill_parent"
+		    	android:layout_weight="2"
+		    	android:background="@drawable/stage_5_bw"
+		    	/>
+		    <ImageButton
+		    	android:id="@+id/ibStage6"
+		    	android:onClick="stage6_onclick"
+				android:layout_width="fill_parent"
+		    	android:layout_height="fill_parent"
+		    	android:layout_weight="2"
+		    	android:background="@drawable/stage_6_bw"		    	
+		    	/>
+    	</LinearLayout>
+    	
+    </LinearLayout>
+    
+    
+    <ImageButton 
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_margin="@dimen/footer_margin"
+    	android:scaleType="fitCenter"
+    	android:layout_gravity="bottom|left"
+    	android:background="#00000000"
+    	android:src="@drawable/btn_back" 
+    	android:onClick="back_onclick" />	<!-- android:visibility="gone" -->
+</FrameLayout>

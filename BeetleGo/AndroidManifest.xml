@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="game.edw.beetlego"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="7" />
+
+    <application android:icon="@drawable/icon" android:label="@string/app_name">
+        <activity android:name=".BeetleGoActivity"
+                  android:label="@string/app_name" android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".SelectFrame" android:screenOrientation="landscape"/>
+        <activity android:name=".SelectModeFrame" android:screenOrientation="landscape"/>
+        <activity android:name=".LoadingFrame" android:screenOrientation="landscape"/>
+        <activity android:name=".GameFrame" android:screenOrientation="landscape"/>
+        <activity android:name=".GameWinFrame" android:screenOrientation="landscape"/>
+        <activity android:name=".GameOverFrame" android:screenOrientation="landscape"/>
+        
+		<activity android:name=".menu.MenuFrame" android:screenOrientation="landscape"/>
+		<activity android:name=".menu.AchieveFrame" android:screenOrientation="landscape"/>
+		<activity android:name=".menu.TopRankFrame" android:screenOrientation="landscape"/>
+		<activity android:name=".menu.ToolsFrame" android:screenOrientation="landscape"/>
+		<activity android:name=".menu.CreditsFrame" android:screenOrientation="landscape"/>
+		<activity android:name=".menu.HowFrame" android:screenOrientation="landscape"/>
+		
+		<activity android:name=".DebugFrame" android:screenOrientation="landscape"/>
+    </application>
+</manifest>

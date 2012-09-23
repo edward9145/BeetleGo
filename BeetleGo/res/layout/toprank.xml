@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/toprank_bg"
+    >
+    
+    <ImageButton 
+    	android:layout_width="120dp"
+    	android:layout_height="60dp"
+    	android:src="@drawable/btn_menu"
+    	android:scaleType="fitCenter"
+    	android:background="#00000000"
+    	android:layout_gravity="top|left"
+    	android:layout_marginTop="5dp"
+    	android:layout_marginLeft="5dp"
+    	android:onClick="toMenu"
+    	/>
+    
+    <LinearLayout 
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+    	android:gravity="left"
+    	android:orientation="vertical" >
+    	<LinearLayout 
+    		android:layout_width="fill_parent"
+    		android:layout_height="fill_parent"
+    		android:layout_weight="3.5" />
+    	<LinearLayout 
+    		android:layout_width="fill_parent"
+    		android:layout_height="fill_parent"
+    		android:layout_marginBottom="10dp"
+    		android:orientation="vertical"
+    		android:layout_weight="1" >
+    		<LinearLayout 
+	    		android:layout_width="fill_parent"
+	    		android:layout_height="fill_parent"
+	    		android:layout_weight="1"
+	    		android:orientation="horizontal" >
+	    		<ImageView 
+	    			android:layout_width="fill_parent"
+	    			android:layout_height="fill_parent"
+	    			android:layout_weight="3"
+	    			android:gravity="bottom"
+	    			android:scaleType="fitCenter"
+	    			android:src="@drawable/num1" />
+	    		<TextView 
+	    			android:id="@+id/tvTopName1"
+	    			android:layout_width="fill_parent"
+	    			android:layout_height="fill_parent"
+	    			android:layout_weight="2" 
+	    			android:gravity="center"
+	    			android:textColor="@color/black"
+	    			android:textSize="@dimen/toprank_fontsize"
+	    			android:text="player1"/>
+	    		<TextView 
+	    			android:id="@+id/tvTopScore1"
+	    			android:layout_width="fill_parent"
+	    			android:layout_height="fill_parent"
+	    			android:layout_weight="2"
+	    			android:gravity="center"
+	    			android:textColor="@color/black"
+	    			android:textSize="@dimen/toprank_fontsize" 
+	    			android:text="000000"/>
+	    	</LinearLayout>
+	    	
+	    	<LinearLayout 
+	    		android:layout_width="fill_parent"
+	    		android:layout_height="fill_parent"
+	    		android:layout_weight="1"
+	    		android:orientation="horizontal" >
+	    		<ImageView 
+	    			android:layout_width="fill_parent"
+	    			android:layout_height="fill_parent"
+	    			android:layout_weight="3"
+	    			android:gravity="bottom"
+	    			android:scaleType="fitCenter"
+	    			android:src="@drawable/num2" />
+	    		<TextView 
+	    			android:id="@+id/tvTopName2"
+	    			android:layout_width="fill_parent"
+	    			android:layout_height="fill_parent"
+	    			android:layout_weight="2" 
+	    			android:gravity="center"
+	    			android:textColor="@color/black"
+	    			android:textSize="@dimen/toprank_fontsize"
+	    			android:text="player2"/>
+	    		<TextView 
+	    			android:id="@+id/tvTopScore2"
+	    			android:layout_width="fill_parent"
+	    			android:layout_height="fill_parent"
+	    			android:layout_weight="2"
+	    			android:gravity="center"
+	    			android:textColor="@color/black"
+	    			android:textSize="@dimen/toprank_fontsize" 
+	    			android:text="000000"/>
+	    	</LinearLayout>
+	    	
+	    	<LinearLayout 
+	    		android:layout_width="fill_parent"
+	    		android:layout_height="fill_parent"
+	    		android:layout_weight="1"
+	    		android:orientation="horizontal" >
+	    		<ImageView 
+	    			android:layout_width="fill_parent"
+	    			android:layout_height="fill_parent"
+	    			android:layout_weight="3"
+	    			android:gravity="bottom"
+	    			android:scaleType="fitCenter"
+	    			android:src="@drawable/num3" />
+	    		<TextView 
+	    			android:id="@+id/tvTopName3"
+	    			android:layout_width="fill_parent"
+	    			android:layout_height="fill_parent"
+	    			android:layout_weight="2" 
+	    			android:gravity="center"
+	    			android:textColor="@color/black"
+	    			android:textSize="@dimen/toprank_fontsize"
+	    			android:text="player3"/>
+	    		<TextView 
+	    			android:id="@+id/tvTopScore3"
+	    			android:layout_width="fill_parent"
+	    			android:layout_height="fill_parent"
+	    			android:layout_weight="2"
+	    			android:gravity="center"
+	    			android:textColor="@color/black"
+	    			android:textSize="@dimen/toprank_fontsize" 
+	    			android:text="000000"/>
+	    	</LinearLayout>
+	    	
+	    	<LinearLayout 
+	    		android:layout_width="fill_parent"
+	    		android:layout_height="fill_parent"
+	    		android:layout_weight="1"
+	    		android:orientation="horizontal" >
+	    		<ImageView 
+	    			android:layout_width="fill_parent"
+	    			android:layout_height="fill_parent"
+	    			android:layout_weight="3"
+	    			android:gravity="bottom"
+	    			android:scaleType="fitCenter"
+	    			android:src="@drawable/num4" />
+	    		<TextView 
+	    			android:id="@+id/tvTopName4"
+	    			android:layout_width="fill_parent"
+	    			android:layout_height="fill_parent"
+	    			android:layout_weight="2" 
+	    			android:gravity="center"
+	    			android:textColor="@color/black"
+	    			android:textSize="@dimen/toprank_fontsize"
+	    			android:text="player4"/>
+	    		<TextView 
+	    			android:id="@+id/tvTopScore4"
+	    			android:layout_width="fill_parent"
+	    			android:layout_height="fill_parent"
+	    			android:layout_weight="2"
+	    			android:gravity="center"
+	    			android:textColor="@color/black"
+	    			android:textSize="@dimen/toprank_fontsize" 
+	    			android:text="000000"/>
+	    	</LinearLayout>
+	    	
+	    	<LinearLayout 
+	    		android:layout_width="fill_parent"
+	    		android:layout_height="fill_parent"
+	    		android:layout_weight="1"
+	    		android:orientation="horizontal" >
+	    		<ImageView 
+	    			android:layout_width="fill_parent"
+	    			android:layout_height="fill_parent"
+	    			android:layout_weight="3"
+	    			android:gravity="bottom"
+	    			android:scaleType="fitCenter"
+	    			android:src="@drawable/num5" />
+	    		<TextView 
+	    			android:id="@+id/tvTopName5"
+	    			android:layout_width="fill_parent"
+	    			android:layout_height="fill_parent"
+	    			android:layout_weight="2" 
+	    			android:gravity="center"
+	    			android:textColor="@color/black"
+	    			android:textSize="@dimen/toprank_fontsize"
+	    			android:text="player5"/>
+	    		<TextView 
+	    			android:id="@+id/tvTopScore5"
+	    			android:layout_width="fill_parent"
+	    			android:layout_height="fill_parent"
+	    			android:layout_weight="2"
+	    			android:gravity="center"
+	    			android:textColor="@color/black"
+	    			android:textSize="@dimen/toprank_fontsize" 
+	    			android:text="000000"/>
+	    	</LinearLayout>
+	    	
+    	</LinearLayout>
+	</LinearLayout>
+</FrameLayout>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <LinearLayout    	 
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:orientation="vertical">
+    	
+    	<LinearLayout    	 
+    		android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+    		android:orientation="horizontal">
+    		<TextView 
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:layout_marginRight="10dp"
+    			android:text="stage length"/>
+    		<EditText android:numeric="integer"
+    			android:id="@+id/etStageLen"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"/>
+   		</LinearLayout>
+   		
+    	<LinearLayout    	 
+    		android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+    		android:orientation="horizontal">
+    		<TextView 
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:layout_marginRight="10dp"
+    			android:text="rocketA speedX"/>
+    		<EditText android:numeric="decimal"
+    			android:id="@+id/etRocketAX"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"/>
+   		</LinearLayout>
+    	
+    	<LinearLayout    	 
+    		android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+    		android:orientation="horizontal">
+    		<TextView 
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:layout_marginRight="10dp"
+    			android:text="rocketA num"/>
+    		<EditText android:numeric="integer"
+    			android:id="@+id/etRocketAN"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"/>
+   		</LinearLayout>
+   		
+    	<LinearLayout    	 
+    		android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+    		android:orientation="horizontal">
+    		<TextView 
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:layout_marginRight="10dp"
+    			android:text="rocketB speedX"/>
+    		<EditText android:numeric="decimal"
+    			android:id="@+id/etRocketBX"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"/>
+   		</LinearLayout>
+   		
+    	<LinearLayout    	 
+    		android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+    		android:orientation="horizontal">
+    		<TextView 
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:layout_marginRight="10dp"
+    			android:text="rocketB num"/>
+    		<EditText android:numeric="integer"
+    			android:id="@+id/etRocketBN"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"/>
+   		</LinearLayout>
+   		
+   		<LinearLayout    	 
+    		android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+    		android:orientation="horizontal">
+    		<TextView 
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:layout_marginRight="10dp"
+    			android:text="cloud speedX"/>
+    		<EditText android:numeric="decimal"
+    			android:id="@+id/etCloudX"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"/>
+   		</LinearLayout>
+   		
+   		<LinearLayout    	 
+    		android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+    		android:orientation="horizontal">
+    		<TextView 
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:layout_marginRight="10dp"
+    			android:text="cactus speedX"/>
+    		<EditText android:numeric="decimal"
+    			android:id="@+id/etCactusX"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"/>
+   		</LinearLayout>
+   		
+    </LinearLayout>
+	
+	<LinearLayout    	 
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:orientation="vertical"
+    	android:layout_gravity="top|right">
+    	<LinearLayout    	 
+    		android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+    		android:orientation="horizontal">
+    		<TextView 
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:layout_marginRight="10dp"
+    			android:text="heart speedX"/>
+    		<EditText android:numeric="decimal"
+    			android:id="@+id/etHeartX"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"/>
+   		</LinearLayout>
+    	
+    	<LinearLayout    	 
+    		android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+    		android:orientation="horizontal">
+    		<TextView 
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:layout_marginRight="10dp"
+    			android:text="heart speedY"/>
+    		<EditText android:numeric="decimal"
+    			android:id="@+id/etHeartY"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"/>
+   		</LinearLayout>
+   		
+   		<LinearLayout    	 
+    		android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+    		android:orientation="horizontal">
+    		<TextView 
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:layout_marginRight="10dp"
+    			android:text="heart add life"/>
+    		<EditText android:numeric="integer"
+    			android:id="@+id/etHeartAdd"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"/>
+   		</LinearLayout>
+   		
+    	<LinearLayout    	 
+    		android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+    		android:orientation="horizontal">
+    		<TextView 
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:layout_marginRight="10dp"
+    			android:text="plane speedY"/>
+    		<EditText android:numeric="decimal"
+    			android:id="@+id/etPlaneY"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"/>
+   		</LinearLayout>
+   		
+    	<LinearLayout    	 
+    		android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+    		android:orientation="horizontal">
+    		<TextView 
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:layout_marginRight="10dp"
+    			android:text="plane life"/>
+    		<EditText android:numeric="integer"
+    			android:id="@+id/etPlaneLife"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"/>
+   		</LinearLayout>
+   		
+   		<LinearLayout    	 
+    		android:layout_width="wrap_content"
+   			android:layout_height="wrap_content"
+    		android:orientation="horizontal">
+    		<TextView 
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:layout_marginRight="10dp"
+    			android:text="plane max life"/>
+    		<EditText android:numeric="integer"
+    			android:id="@+id/etPlaneMaxLife"
+    			android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"/>
+   		</LinearLayout>
+   		
+    </LinearLayout>
+	
+	<Button
+		android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:text="OK"
+    	android:onClick="setOK"
+    	android:layout_gravity="center"
+	/>
+</FrameLayout>
