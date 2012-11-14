@@ -41,4 +41,10 @@ public class StartStation {
 	public boolean notExist(){
 		return X < -drawRect.width();
 	}
+	
+	public static void release(){
+		if(bmp == null) return;
+		bmp.recycle();
+		bmp = null;
+	}
 }

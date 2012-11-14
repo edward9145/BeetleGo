@@ -29,6 +29,8 @@ public class LoadingFrame extends Activity {
         ivLoad_fg = (ImageView)findViewById(R.id.ivLoad_fg);
         ivLoading = (ImageView)findViewById(R.id.ivLoading);
         
+        configResolution();
+
         hWait.postDelayed(new Runnable(){
         	@Override
         	public void run(){
@@ -43,6 +45,17 @@ public class LoadingFrame extends Activity {
 	@Override
 	public void onBackPressed() {
 		return ;
+	}
+	
+	public void configResolution(){
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        //获得手机分辨率
+        C.SCR_W = dm.widthPixels;
+        C.SCR_H = dm.heightPixels;
+        Log.d("SCR_W, H", C.SCR_W +" , " + C.SCR_H);
+        if(C.SCR_W < C.SCR_H){ C.SCR_H ^= C.SCR_W; C.SCR_W ^= C.SCR_H; C.SCR_H ^= C.SCR_W;}
+        C.SCR_RECT = new Rect(0, 0, C.SCR_W, C.SCR_H);
 	}
 	
 }

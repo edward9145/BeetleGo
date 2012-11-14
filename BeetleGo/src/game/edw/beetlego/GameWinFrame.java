@@ -83,9 +83,9 @@ public class GameWinFrame extends Activity {
 	
 	public void unlockStage(){
 		C.STAGE_ID ++;
-		C.STAGE_NUM ++;
+		if(C.STAGE_ID > C.STAGE_NUM) C.STAGE_NUM ++;
 		if(C.STAGE_ID > C.STAGE_MAX) C.STAGE_ID = C.STAGE_MAX;
 		if(C.STAGE_NUM > C.STAGE_MAX) C.STAGE_NUM = C.STAGE_MAX;
-		Log.d("stage_id", "" + C.STAGE_ID);
+		Log.d("stage_info", "id: " + C.STAGE_ID + " num: " + C.STAGE_NUM);
 	}
 }

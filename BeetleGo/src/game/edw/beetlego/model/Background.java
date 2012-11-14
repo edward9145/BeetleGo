@@ -89,4 +89,25 @@ public class Background {
 			bmpCloudRight[i] = new Rect((int)((C.SCR_W-cloudX[i])*bmpRectCloud.width()/C.SCR_W), 0, bmpRectCloud.width(), bmpRectCloud.height());
 		}
 	}
+	
+	public static void release(){
+		if(bmp == null) return;
+		for(int i=0; i<BMP_NUM; i++){
+			bmp[i].recycle();
+			bmp[i] = null;
+		}
+		bmp = null;
+		
+		for(int i=0; i<GRASS_NUM; i++){
+			bmpGrass[i].recycle();
+			bmpGrass[i] = null;
+		}
+		bmpGrass = null;
+		
+		for(int i=0; i<CLOUD_NUM; i++){
+			bmpCloud[i].recycle();
+			bmpCloud[i] = null;
+		}
+		bmpCloud = null;
+	}
 }

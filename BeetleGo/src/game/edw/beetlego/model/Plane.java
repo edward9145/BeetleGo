@@ -81,4 +81,13 @@ public class Plane {
 	public boolean hasLand(int endX, int endY){
 		return (X >= endX) && (Y > endY);
 	}
+	
+	public static void release(){
+		if(bmp == null) return;
+		for(int i=0; i<BMP_NUM; i++){
+			bmp[i].recycle();
+			bmp[i] = null;
+		}
+		bmp = null;
+	}
 }

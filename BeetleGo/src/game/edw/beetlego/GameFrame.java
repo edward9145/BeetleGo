@@ -70,6 +70,7 @@ public class GameFrame extends Activity {
         setLife(C.PLANE_LIFE);
         gameView = new GameView(this);
         gameView.setFrame(GameFrame.this);
+        gameView.initGame();
         llGame.addView(gameView);
         
         acBG = new AudioClip(this, R.raw.bg_music);
@@ -89,6 +90,7 @@ public class GameFrame extends Activity {
     		ibPlay.setImageResource(R.drawable.btn_play);
     	}
     	acBG.play(true);
+    	gameView.startTimer();
     }
     
     @Override
@@ -98,18 +100,24 @@ public class GameFrame extends Activity {
     		sensorManager.unregisterListener(this.gameView);
     		Log.d("PAUSE", "sensor unregister");
     	}
-    	if(gameView.state == C.GAME_PLAY) 
+    	if(gameView.state == C.GAME_PLAY){
     		gameView.state = C.GAME_PAUSE;
+    	}
     	acBG.pauseMusic();
+    	finish();		// should handle the pause event(store the scene and then restore). I'm lazy...
     }
 	
 	@Override
 	protected void onDestroy(){
 		super.onDestroy();
-		if(gameView != null);
+		Log.d("GameFrame", "DESTORY!");
+		if(gameView != null){
 			gameView.stopTimer();
-		if(acBG != null)
+			gameView.release();
+		}
+		if(acBG != null){
 			acBG.freeMusic();
+		}
 	}
 	
 	public void replay_onclick(View view){
@@ -192,9 +200,9 @@ public class GameFrame extends Activity {
 		hWait.postDelayed(new Runnable(){
         	@Override
         	public void run(){
-        		finish();
         		Intent intent = new Intent(GameFrame.this, GameOverFrame.class);
         		startActivity(intent);
+        		finish();
         	}
         }, waitTime);
 		
@@ -206,9 +214,10 @@ public class GameFrame extends Activity {
 		hWait.postDelayed(new Runnable(){
         	@Override
         	public void run(){
-        		finish();
+        		gameView.release();
         		Intent intent = new Intent(GameFrame.this, GameWinFrame.class);
         		startActivity(intent);
+        		finish();
         	}
         }, waitTime);
 		

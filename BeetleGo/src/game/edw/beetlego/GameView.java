@@ -96,8 +96,8 @@ public class GameView extends View implements SensorEventListener{
 		super(context);
 		this.context = context;
 		
-		initGame();
-		startTimer();
+//		initGame();
+//		startTimer();
 	}
 	
 	public void setFrame(GameFrame gf){
@@ -629,6 +629,19 @@ public class GameView extends View implements SensorEventListener{
 				}
 			}
 		}
+	}
+	
+	public void release(){
+		Plane.release();
+		Rocket.release();
+		RocketB.release();
+		Cloud.release();
+		Cactus.release();
+		Heart.release();
+		Bang.release();		
+		Background.release();
+		StartStation.release();
+		EndStation.release();
 	}
 
 }

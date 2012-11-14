@@ -17,9 +17,9 @@
         <activity android:name=".SelectFrame" android:screenOrientation="landscape"/>
         <activity android:name=".SelectModeFrame" android:screenOrientation="landscape"/>
         <activity android:name=".LoadingFrame" android:screenOrientation="landscape"/>
-        <activity android:name=".GameFrame" android:screenOrientation="landscape"/>
-        <activity android:name=".GameWinFrame" android:screenOrientation="landscape"/>
-        <activity android:name=".GameOverFrame" android:screenOrientation="landscape"/>
+        <activity android:name=".GameFrame" android:screenOrientation="landscape" android:launchMode="singleTop"/>
+        <activity android:name=".GameWinFrame" android:screenOrientation="landscape" android:launchMode="singleTop"/>
+        <activity android:name=".GameOverFrame" android:screenOrientation="landscape" android:launchMode="singleTop"/>
         
 		<activity android:name=".menu.MenuFrame" android:screenOrientation="landscape"/>
 		<activity android:name=".menu.AchieveFrame" android:screenOrientation="landscape"/>

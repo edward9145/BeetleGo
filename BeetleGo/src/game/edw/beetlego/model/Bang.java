@@ -18,8 +18,8 @@ public class Bang {
 	public Rect bmpRect = new Rect(0,0,50,50);
 	public Rect drawRect = new Rect(0,0,45,45);
 	
-	public static int BANG_NUM = 3;
-	public static Bitmap []bmp = new Bitmap[BANG_NUM];
+	public static int BMP_NUM = 3;
+	public static Bitmap []bmp = new Bitmap[BMP_NUM];
 	
 	public Bang(float x, float y){
 		this.ID = new Random().nextInt(3);
@@ -50,5 +50,14 @@ public class Bang {
 	
 	public boolean hasGone(){
 		return bangTime <=0 ;
+	}
+	
+	public static void release(){
+		if(bmp == null) return;
+		for(int i=0; i<BMP_NUM; i++){
+			bmp[i].recycle();
+			bmp[i] = null;
+		}
+		bmp = null;
 	}
 }

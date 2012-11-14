@@ -83,4 +83,10 @@ public class Heart {
 		if(X > -drawRect.width() && X < C.SCR_W)
 			update();
 	}
+	
+	public static void release(){
+		if(bmp == null) return;
+		bmp.recycle();
+		bmp = null;
+	}
 }

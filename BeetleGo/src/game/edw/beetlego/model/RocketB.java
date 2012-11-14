@@ -82,4 +82,13 @@ public class RocketB {
 		if(X > -drawRect.width() && X < C.SCR_W)
 			update();
 	}
+	
+	public static void release(){
+		if(bmp == null) return;
+		for(int i=0; i<BMP_NUM; i++){
+			bmp[i].recycle();
+			bmp[i] = null;
+		}
+		bmp = null;
+	}
 }

@@ -39,4 +39,10 @@ public class EndStation {
 			drawRect.offsetTo((int)X, (int)Y);
 		}
 	}
+	
+	public static void release(){
+		if(bmp == null) return;
+		bmp.recycle();
+		bmp = null;
+	}
 }

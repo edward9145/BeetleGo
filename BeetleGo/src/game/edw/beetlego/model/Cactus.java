@@ -18,7 +18,7 @@ public class Cactus {
 	public Rect bmpRect = new Rect(0,0,42,98);
 	public Rect drawRect = new Rect(0,0,64,150);
 	public Rect collisionRect = new Rect(0,0,60,140);
-	public static int BMP_NUM = 3;
+//	public static int BMP_NUM = 3;
 	public static Bitmap bmp;
 	
 	public Cactus(float x, float y){
@@ -61,5 +61,11 @@ public class Cactus {
 	public void endAnime(){
 		if(X > -drawRect.width() && X < C.SCR_W)
 			update();
+	}
+	
+	public static void release(){
+		if(bmp == null) return;
+		bmp.recycle();
+		bmp = null;
 	}
 }
