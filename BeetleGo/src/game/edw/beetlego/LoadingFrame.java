@@ -1,5 +1,6 @@
 package game.edw.beetlego;
 
+import game.edw.beetlego.manager.BitmapManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -14,7 +15,7 @@ import android.widget.ImageView;
 public class LoadingFrame extends Activity {
 	
 	Handler hWait = new Handler();
-	long waitTime = 500;
+	long waitTime = 100;
 	
 	ImageView ivLoad_fg;
 	ImageView ivLoading;
@@ -31,14 +32,12 @@ public class LoadingFrame extends Activity {
         
         configResolution();
 
-        hWait.postDelayed(new Runnable(){
-        	@Override
-        	public void run(){
-        		finish();
-        		Intent intent = new Intent(LoadingFrame.this, GameFrame.class);
-        		startActivity(intent);
-        	}
-        }, waitTime);
+      hWait.postDelayed(new Runnable(){
+    	@Override
+    	public void run(){
+    		loading();
+    	}
+    }, waitTime);
         
     }
 	
@@ -56,6 +55,13 @@ public class LoadingFrame extends Activity {
         Log.d("SCR_W, H", C.SCR_W +" , " + C.SCR_H);
         if(C.SCR_W < C.SCR_H){ C.SCR_H ^= C.SCR_W; C.SCR_W ^= C.SCR_H; C.SCR_H ^= C.SCR_W;}
         C.SCR_RECT = new Rect(0, 0, C.SCR_W, C.SCR_H);
+	}
+	
+	public void loading(){
+		BitmapManager.loadBitmaps(this.getBaseContext());
+		finish();
+		Intent intent = new Intent(LoadingFrame.this, GameFrame.class);
+		startActivity(intent);
 	}
 	
 }

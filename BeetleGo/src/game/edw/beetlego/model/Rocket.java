@@ -18,7 +18,7 @@ public class Rocket {
 	public Rect drawRect = new Rect(0,0,80,37);
 	public Rect collisionRect = new Rect(0,0,60,37);
 	public static int BMP_NUM = 3;
-	public static Bitmap []bmp = new Bitmap[3];
+	public Bitmap []bmp = new Bitmap[3];
 	
 	public Rocket(float x, float y){
 		this.X = x;
@@ -83,12 +83,12 @@ public class Rocket {
 			update();
 	}
 	
-	public static void release(){
-		if(bmp == null) return;
-		for(int i=0; i<BMP_NUM; i++){
-			bmp[i].recycle();
-			bmp[i] = null;
-		}
-		bmp = null;
-	}
+//	public static void release(){
+//		if(bmp == null) return;
+//		for(int i=0; i<BMP_NUM; i++){
+//			bmp[i].recycle();
+//			bmp[i] = null;
+//		}
+//		bmp = null;
+//	}
 }

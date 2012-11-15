@@ -19,7 +19,7 @@ public class Heart {
 	public int ID = 0;
 	public Rect bmpRect = new Rect(0,0,30,28);
 	public Rect drawRect = new Rect(0,0,40,40);
-	public static Bitmap bmp;
+	public Bitmap bmp;
 	
 	public Heart(float x, float y){
 		this.X = x;
@@ -84,9 +84,9 @@ public class Heart {
 			update();
 	}
 	
-	public static void release(){
-		if(bmp == null) return;
-		bmp.recycle();
-		bmp = null;
-	}
+//	public static void release(){
+//		if(bmp == null) return;
+//		bmp.recycle();
+//		bmp = null;
+//	}
 }

@@ -2,12 +2,10 @@ package game.edw.beetlego;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -71,6 +69,7 @@ public class GameFrame extends Activity {
         gameView = new GameView(this);
         gameView.setFrame(GameFrame.this);
         gameView.initGame();
+        Log.d("GameFrame", "CREATE gameView.initGame()");
         llGame.addView(gameView);
         
         acBG = new AudioClip(this, R.raw.bg_music);
@@ -96,6 +95,7 @@ public class GameFrame extends Activity {
     @Override
     protected void onPause(){
     	super.onPause();
+    	Log.d("GameFrame", "PAUSE!");
     	if(C.hasGravity){
     		sensorManager.unregisterListener(this.gameView);
     		Log.d("PAUSE", "sensor unregister");
@@ -104,16 +104,19 @@ public class GameFrame extends Activity {
     		gameView.state = C.GAME_PAUSE;
     	}
     	acBG.pauseMusic();
-    	finish();		// should handle the pause event(store the scene and then restore). I'm lazy...
+
+    	// TODO !! should handle the pause event(store the scene and then restore). I'm lazy...
+    	gameView.state = -1;
+    	gameView.release();
+    	finish();
     }
 	
 	@Override
-	protected void onDestroy(){
-		super.onDestroy();
-		Log.d("GameFrame", "DESTORY!");
+	protected void onStop(){
+		super.onStop();
+		Log.d("GameFrame", "STOP!");
 		if(gameView != null){
 			gameView.stopTimer();
-			gameView.release();
 		}
 		if(acBG != null){
 			acBG.freeMusic();
@@ -121,12 +124,28 @@ public class GameFrame extends Activity {
 	}
 	
 	public void replay_onclick(View view){
-		finish();
-		Intent intent = new Intent(GameFrame.this, GameFrame.class);
-		startActivity(intent);
+		gameView.stopTimer();
+		gameView.initGame();
+		gameView.updateInfo();
+		setSeekBar(0);
+		setPlayBtn();
+		gameView.startTimer();
 	}
 	
 	public void play_onclick(View view){
+		setPlayBtn();
+	}
+	
+	public void showMsg(final String s){
+		this.runOnUiThread(new Runnable() {
+			public void run(){
+				Toast.makeText(GameFrame.this, s, Toast.LENGTH_SHORT)
+				.show();
+			}
+		});
+	}
+	
+	public void setPlayBtn(){
 		if(gameView.state == C.GAME_PLAY){
 			gameView.state = C.GAME_PAUSE;
 			ibPlay.setImageResource(R.drawable.btn_play);
@@ -137,16 +156,10 @@ public class GameFrame extends Activity {
 			ibPlay.setImageResource(R.drawable.btn_pause);
 			ibReplay.setVisibility(View.GONE);
 		}
-		
-	}
-	
-	public void showMsg(final String s){
-		this.runOnUiThread(new Runnable() {
-			public void run(){
-				Toast.makeText(GameFrame.this, s, Toast.LENGTH_SHORT)
-				.show();
-			}
-		});
+		else{
+			ibPlay.setImageResource(R.drawable.btn_pause);
+			ibReplay.setVisibility(View.GONE);
+		}
 	}
 	
 	public void setLife(final int life){
@@ -196,28 +209,25 @@ public class GameFrame extends Activity {
 	}
 	
 	public void gameOver(){
-		
 		hWait.postDelayed(new Runnable(){
         	@Override
         	public void run(){
+        		finish();
         		Intent intent = new Intent(GameFrame.this, GameOverFrame.class);
         		startActivity(intent);
-        		finish();
         	}
         }, waitTime);
 		
 	}
 	
 	
-	public void gameWin(){
-
+	public void gameWin(){		
 		hWait.postDelayed(new Runnable(){
         	@Override
         	public void run(){
-        		gameView.release();
+        		finish();
         		Intent intent = new Intent(GameFrame.this, GameWinFrame.class);
         		startActivity(intent);
-        		finish();
         	}
         }, waitTime);
 		
@@ -231,6 +241,8 @@ public class GameFrame extends Activity {
 			ibReplay.setVisibility(View.VISIBLE);
 			return ;
 		}
+		gameView.state = -1;	// won't invoke draw();
+		gameView.stopTimer();
 		super.onBackPressed();
 	}
 }

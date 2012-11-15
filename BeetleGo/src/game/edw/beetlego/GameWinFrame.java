@@ -1,5 +1,6 @@
 package game.edw.beetlego;
 
+import game.edw.beetlego.data.Config;
 import game.edw.beetlego.data.RankScore;
 import game.edw.beetlego.data.Storage;
 import android.app.Activity;
@@ -77,13 +78,16 @@ public class GameWinFrame extends Activity {
 		
 		finish();
 		C.STAGE_LENGTH = C.STAGE_INFO[C.STAGE_ID];
-		Intent intent = new Intent(GameWinFrame.this, GameFrame.class);
+		Intent intent = new Intent(GameWinFrame.this, LoadingFrame.class);
 		startActivity(intent);
 	}
 	
 	public void unlockStage(){
 		C.STAGE_ID ++;
-		if(C.STAGE_ID > C.STAGE_NUM) C.STAGE_NUM ++;
+		if(C.STAGE_ID > C.STAGE_NUM){
+			C.STAGE_NUM ++;
+			Storage.saveConfig(new Config(C.STAGE_NUM, C.hasSound, C.hasMusic, C.hasGravity, C.LAST_NAME), this);
+		}
 		if(C.STAGE_ID > C.STAGE_MAX) C.STAGE_ID = C.STAGE_MAX;
 		if(C.STAGE_NUM > C.STAGE_MAX) C.STAGE_NUM = C.STAGE_MAX;
 		Log.d("stage_info", "id: " + C.STAGE_ID + " num: " + C.STAGE_NUM);

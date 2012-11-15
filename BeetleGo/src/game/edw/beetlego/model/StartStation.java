@@ -13,12 +13,12 @@ public class StartStation {
 	public Random rand = new Random();
 	public float X = 0;
 	public float Y = 0;
-	public float SpeedX = 5;
+	public float SpeedX = 8;
 	public int ID = 0;
 	public Rect bmpRect = new Rect(0,0,640,320);
 	public Rect drawRect = new Rect(0,0, 150, 225);
 	
-	public static Bitmap bmp;
+	public Bitmap bmp;
 	
 	public StartStation(Bitmap b){
 		bmp = b;
@@ -42,9 +42,9 @@ public class StartStation {
 		return X < -drawRect.width();
 	}
 	
-	public static void release(){
-		if(bmp == null) return;
-		bmp.recycle();
-		bmp = null;
-	}
+//	public static void release(){
+//		if(bmp == null) return;
+//		bmp.recycle();
+//		bmp = null;
+//	}
 }

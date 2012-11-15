@@ -19,23 +19,15 @@ public class Bang {
 	public Rect drawRect = new Rect(0,0,45,45);
 	
 	public static int BMP_NUM = 3;
-	public static Bitmap []bmp = new Bitmap[BMP_NUM];
-	
-	public Bang(float x, float y){
-		this.ID = new Random().nextInt(3);
-		this.X = x;
-		this.Y = y;
-		this.bangTime = 10;
-		bmpRect = new Rect(0,0, bmp[0].getWidth(), bmp[0].getHeight());
-		drawRect.offsetTo((int)X, (int)Y);
-	}
-	
+	public Bitmap []bmp = new Bitmap[BMP_NUM];
+		
 	public Bang(Bitmap[] bmp, float x, float y){
 		this.ID = new Random().nextInt(3);
 		this.X = x;
 		this.Y = y;
 		this.bmp = bmp;
 		bmpRect = new Rect(0,0, bmp[0].getWidth(), bmp[0].getHeight());
+		drawRect.offsetTo((int)X, (int)Y);
 	}
 	
 	public void draw(Canvas canvas){
@@ -52,12 +44,12 @@ public class Bang {
 		return bangTime <=0 ;
 	}
 	
-	public static void release(){
-		if(bmp == null) return;
-		for(int i=0; i<BMP_NUM; i++){
-			bmp[i].recycle();
-			bmp[i] = null;
-		}
-		bmp = null;
-	}
+//	public static void release(){
+//		if(bmp == null) return;
+//		for(int i=0; i<BMP_NUM; i++){
+//			bmp[i].recycle();
+//			bmp[i] = null;
+//		}
+//		bmp = null;
+//	}
 }

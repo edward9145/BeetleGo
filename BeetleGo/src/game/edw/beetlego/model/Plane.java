@@ -18,8 +18,9 @@ public class Plane {
 	public Rect bmpRect = new Rect(0,0,118,109);
 	public Rect drawRect = new Rect(0,0,130,120);
 	public Rect collisionRect = new Rect(0,0,80,52);
+
+	public Bitmap []bmp = null;
 	public static int BMP_NUM = 3;
-	public static Bitmap []bmp = new Bitmap[BMP_NUM];
 	
 	public Plane(float x, float y){
 		this.X = x;
@@ -82,12 +83,12 @@ public class Plane {
 		return (X >= endX) && (Y > endY);
 	}
 	
-	public static void release(){
-		if(bmp == null) return;
-		for(int i=0; i<BMP_NUM; i++){
-			bmp[i].recycle();
-			bmp[i] = null;
-		}
-		bmp = null;
-	}
+//	public static void release(){
+//		if(bmp == null) return;
+//		for(int i=0; i<BMP_NUM; i++){
+//			bmp[i].recycle();
+//			bmp[i] = null;
+//		}
+//		bmp = null;
+//	}
 }

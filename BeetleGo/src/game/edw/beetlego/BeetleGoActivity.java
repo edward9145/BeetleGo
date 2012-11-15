@@ -5,9 +5,7 @@ import game.edw.beetlego.data.Storage;
 import game.edw.beetlego.menu.MenuFrame;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -48,8 +46,8 @@ public class BeetleGoActivity extends Activity {
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    	Intent intent = new Intent(BeetleGoActivity.this, DebugFrame.class);
-    	startActivity(intent);
+//    	Intent intent = new Intent(BeetleGoActivity.this, DebugFrame.class);
+//    	startActivity(intent);
 		return false;
     }
     

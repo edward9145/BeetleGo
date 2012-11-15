@@ -1,5 +1,7 @@
 package game.edw.beetlego;
 
+import game.edw.beetlego.manager.BitmapManager;
+import game.edw.beetlego.manager.SceneManager;
 import game.edw.beetlego.model.Background;
 import game.edw.beetlego.model.Bang;
 import game.edw.beetlego.model.Cactus;
@@ -9,6 +11,8 @@ import game.edw.beetlego.model.Heart;
 import game.edw.beetlego.model.Plane;
 import game.edw.beetlego.model.Rocket;
 import game.edw.beetlego.model.RocketB;
+import game.edw.beetlego.model.Shelter;
+import game.edw.beetlego.model.Shield;
 import game.edw.beetlego.model.StartStation;
 
 import java.util.ArrayList;
@@ -17,8 +21,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -37,20 +39,7 @@ public class GameView extends View implements SensorEventListener{
 	Random rand = new Random();
 	
 	Paint grayPaint = new Paint();
-	Bitmap bmpPlane[] = new Bitmap[3];
-	Bitmap bmpBG[] = new Bitmap[4];
-	Bitmap bmpGrass[] = new Bitmap[2];
-	Bitmap bmpBgCloud[] = new Bitmap[2];
-	Bitmap bmpCloud[] = new Bitmap[3];
-//	Bitmap bmpLine;
-	Bitmap bmpRocketA[] = new Bitmap[3];
-	Bitmap bmpRocketB[] = new Bitmap[3];
-	Bitmap bmpCactus;
-	Bitmap bmpBangs[] = new Bitmap[3];
-	
-	Bitmap bmpHeart;
-	
-	Bitmap bmpStart, bmpEnd;
+
 	
 	float posX;
 	float posY;
@@ -75,12 +64,13 @@ public class GameView extends View implements SensorEventListener{
 	ArrayList<Cactus> cactuses = new ArrayList<Cactus>(5);
 	ArrayList<Heart> hearts = new ArrayList<Heart>(5);
 	
-	Bang bang;
-	
 	Background bg;
 	
 	StartStation startStation;
 	EndStation endStation;
+	
+	Shield shield;
+	Shelter shelter = null;
 	
 	public int position = 0;
 	public int state = C.GAME_PAUSE;
@@ -95,7 +85,6 @@ public class GameView extends View implements SensorEventListener{
 	public GameView(Context context){
 		super(context);
 		this.context = context;
-		
 //		initGame();
 //		startTimer();
 	}
@@ -138,6 +127,9 @@ public class GameView extends View implements SensorEventListener{
 			rocketB.draw(canvas);
 			for(int i=0;i<rocketBs.size();i++)
 				rocketBs.get(i).draw(canvas);
+			
+			shield.draw(canvas);
+//			shelter.draw(canvas);
 		}
 		else if(state == C.GAME_PLAY){
 			bg.draw(canvas);
@@ -165,6 +157,9 @@ public class GameView extends View implements SensorEventListener{
 			
 			for(int i=0; i<bangs.size(); i++)
 				bangs.get(i).draw(canvas);
+			
+			shield.draw(canvas);
+			shelter.draw(canvas);
 		}
 		else if(state == C.GAME_PAUSE){
 			bg.draw(canvas);
@@ -189,6 +184,9 @@ public class GameView extends View implements SensorEventListener{
 			rocketB.draw(canvas);
 			for(int i=0;i<rocketBs.size();i++)
 				rocketBs.get(i).draw(canvas);
+			
+			shield.draw(canvas);
+			shelter.draw(canvas);
 			
 			canvas.drawRect(0, 0, C.SCR_W, C.SCR_H, grayPaint);
 		}
@@ -218,7 +216,7 @@ public class GameView extends View implements SensorEventListener{
 	
 	public void startTimer(){
 		updateTimer = new Timer();
-		updateTimer.schedule(new UpdataTask(), 10, mPeriod);
+		updateTimer.schedule(new UpdataTask(), 0, mPeriod);
 	}
 	
 	public void stopTimer(){
@@ -276,28 +274,28 @@ public class GameView extends View implements SensorEventListener{
 	
 	public void updateItems(){
 		if(position == updateRocketA){
-			rocketAs.add(new Rocket(bmpRocketA, C.SCR_W + rand.nextInt(C.SCR_W/2), rand.nextInt(C.SCR_H)));
+			rocketAs.add(SceneManager.newRocket(C.SCR_W + rand.nextInt(C.SCR_W/2), rand.nextInt(C.SCR_H)));
 			updateRocketA += C.ROCKETA_UPDATE + updateInc;
 			updateInc += C.UPDATE_INC;
 			Log.d("rocketA", rocketAs.size() + "  next: " + updateRocketA);
 		}
 		if(position == updateRocketB){
-			rocketBs.add(new RocketB(bmpRocketB, C.SCR_W + rand.nextInt(C.SCR_W/2), rand.nextInt(C.SCR_H)));
+			rocketBs.add(SceneManager.newRocketB(C.SCR_W + rand.nextInt(C.SCR_W/2), rand.nextInt(C.SCR_H)));
 			updateRocketB += C.ROCKETB_UPDATE + updateInc;
 			Log.d("rocketB", rocketBs.size() + "  next: " + updateRocketB);
 		}
 		if(position == updateCloud){
-			clouds.add(new Cloud(bmpCloud, C.SCR_W, 100 + rand.nextInt(50)));
+			clouds.add(SceneManager.newCloud(C.SCR_W, 100 + rand.nextInt(50)));
 			updateCloud += C.CLOUD_UPDATE + updateInc;
 			Log.d("clouds", clouds.size() + "  next: " + updateCloud);
 		}
 		if(position == updateCactus){
-			cactuses.add(new Cactus(bmpCactus, C.SCR_W*2 , C.SCR_H));
+			cactuses.add(SceneManager.newCactus(C.SCR_W*2 , C.SCR_H));
 			updateCactus += C.CACTUS_UPDATE + updateInc;
 			Log.d("cactuses", cactuses.size() + "  next: " + updateCactus);
 		}
 		if(position == updateHeart){
-			hearts.add(new Heart(bmpHeart, C.SCR_W*2, C.SCR_H/2));
+			hearts.add(SceneManager.newHeart(C.SCR_W*2, C.SCR_H/2));
 			updateHeart += C.HEART_UPDATE + updateInc;
 			updateInc += C.UPDATE_INC;
 			Log.d("hearts", hearts.size() + "  next: " + updateHeart);
@@ -345,6 +343,8 @@ public class GameView extends View implements SensorEventListener{
 		rocketB.endAnime();
 		for(int i=0;i<rocketBs.size();i++)
 			rocketBs.get(i).endAnime();
+		
+		shield.update();
 	}
 	
 	public void startAnime(){
@@ -356,100 +356,49 @@ public class GameView extends View implements SensorEventListener{
 	public void initGame(){
 		C.score = 0;
 		this.state = C.GAME_START;
+		position = 0;
+		updateRocketA = C.ROCKETA_UPDATE;
+		updateRocketB = C.ROCKETB_UPDATE;
+		updateHeart = C.HEART_UPDATE;
+		updateCloud = C.CLOUD_UPDATE;
+		updateCactus = C.CACTUS_UPDATE;
+		updateInc = C.UPDATE_INC;
+		
+		rocketAs = new ArrayList<Rocket>(10);
+		rocketBs = new ArrayList<RocketB>(10);
+		bangs = new ArrayList<Bang>(10);
+		
+		clouds = new ArrayList<Cloud>(5);
+		cactuses = new ArrayList<Cactus>(5);
+		hearts = new ArrayList<Heart>(5);
 		
 		grayPaint.setColor(0x80000000);
 		
-		bmpBangs[0] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.bang0);
-		bmpBangs[1] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.bang1);
-		bmpBangs[2] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.bang2);
-		bang = new Bang(bmpBangs, 0, 0);
+		// TODO
+		plane = SceneManager.newPlane(C.SCR_W/3, 150);
+//		line = new Line(bmpLine, plane.Y);
+		bg = SceneManager.newBackground();
+		cloud = SceneManager.newCloud(C.SCR_W, 200);
+		cactus = SceneManager.newCactus(C.SCR_W*2 , C.SCR_H);
+		heart = SceneManager.newHeart(C.SCR_W*2, C.SCR_H/2);
 		
-		bmpPlane[0] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.plane0);
-		bmpPlane[1] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.plane1);
-		bmpPlane[2] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.plane2);
-		plane = new Plane(bmpPlane, C.SCR_W/3, 150);
-		
-//		bmpLine = BitmapFactory.decodeResource(
-//				context.getResources(), R.drawable.line);  
-//		line = new Line(bmpLine, plane.Y); 
-		
-		bmpGrass[0] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.grass0);
-		bmpGrass[1] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.grass1);
-		bmpBgCloud[0] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.bgcloud2_0);
-		bmpBgCloud[1] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.bgcloud2_1);
-		bmpBG[0] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.background0);
-		bmpBG[1] = BitmapFactory.decodeResource(
-					context.getResources(), R.drawable.background1);
-		bmpBG[2] = BitmapFactory.decodeResource(
-					context.getResources(), R.drawable.background2);
-		bmpBG[3] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.background3);
-		bg = new Background(bmpBG, bmpGrass, bmpBgCloud);
-		
-		bmpCloud[0] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.cloud0);
-		bmpCloud[1] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.cloud1);
-		bmpCloud[2] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.cloud2);
-		cloud = new Cloud(bmpCloud, C.SCR_W, 200);
-		
-		bmpCactus = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.cactus0);
-		cactus = new Cactus(bmpCactus, C.SCR_W*2 , C.SCR_H);
-		
-		bmpHeart = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.health); 
-		heart = new Heart(bmpHeart, C.SCR_W*2, C.SCR_H/2);
-		
-		bmpRocketA[0] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.rocket_a0);
-		bmpRocketA[1] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.rocket_a1);
-		bmpRocketA[2] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.rocket_a2);
-		rocketA = new Rocket(bmpRocketA, C.SCR_W, 200);
-		
+		rocketA = SceneManager.newRocket(C.SCR_W, 200);
 		for(int i=0; i<C.ROCKETA_NUM; i++){
-			rocketAs.add(new Rocket(bmpRocketA, C.SCR_W + rand.nextInt(C.SCR_W/2), rand.nextInt(C.SCR_H)));
+			rocketAs.add(SceneManager.newRocket(C.SCR_W + rand.nextInt(C.SCR_W/2), rand.nextInt(C.SCR_H)));
 		}
-		
-		bmpRocketB[0] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.rocket_b0);
-		bmpRocketB[1] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.rocket_b1);
-		bmpRocketB[2] = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.rocket_b2);
-		rocketB = new RocketB(bmpRocketB, C.SCR_W, 250);
-		
+		rocketB = SceneManager.newRocketB(C.SCR_W, 250);
 		for(int i=0; i<C.ROCKETB_NUM; i++){
-			rocketBs.add(new RocketB(bmpRocketB, C.SCR_W + rand.nextInt(C.SCR_W/2), rand.nextInt(C.SCR_H)));
+			rocketBs.add(SceneManager.newRocketB(C.SCR_W + rand.nextInt(C.SCR_W/2), rand.nextInt(C.SCR_H)));
 		}
+		startStation = SceneManager.newStartStation();
+		endStation = SceneManager.newEndStation();
 		
-		bmpStart = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.start);
-		bmpEnd = BitmapFactory.decodeResource(
-				context.getResources(), R.drawable.end);
-		startStation = new StartStation(bmpStart);
-		endStation = new EndStation(bmpEnd);
+		shield = SceneManager.newShield(-100, 0);
+		shelter = SceneManager.newShelter();
 		
 		plane.X = startStation.drawRect.right - plane.drawRect.width();
 		plane.Y = startStation.drawRect.top + startStation.drawRect.height()/2;
-	}
-	
-	public void genItems(){
-		
+		plane.Life = C.PLANE_LIFE;
 	}
 	
 	public void touchUpdate(){
@@ -502,25 +451,16 @@ public class GameView extends View implements SensorEventListener{
 		rocketB.update((int)plane.Y);
 		for(int i=0;i<rocketBs.size();i++)
 			rocketBs.get(i).update((int)plane.Y);
+		
+		shield.update();
+		shelter.update(plane.drawRect.centerX(), plane.drawRect.centerY());
 	}
 	
 	public void checkCollision(){
-		if(Rect.intersects(rocketA.collisionRect, plane.collisionRect)){
-			hitRocketA(rocketA);
-		}
-		for(int i=0;i<rocketAs.size();i++){
-			if(Rect.intersects(rocketAs.get(i).collisionRect, plane.collisionRect)){
-				hitRocketA(rocketAs.get(i));
-			}
-		}
-		
-		if(Rect.intersects(rocketB.collisionRect, plane.collisionRect)){
-			hitRocketB(rocketB);
-		}
-		for(int i=0;i<rocketBs.size();i++){
-			if(Rect.intersects(rocketBs.get(i).collisionRect, plane.collisionRect)){
-				hitRocketB(rocketBs.get(i));
-			}
+		if(Rect.intersects(shield.drawRect, plane.collisionRect)){
+			shield.reset();
+			shelter.enable = true;
+			shelter.update(plane.drawRect.centerX(), plane.drawRect.centerY());
 		}
 		
 		if(Rect.intersects(cloud.collisionRect, plane.collisionRect)){
@@ -549,21 +489,59 @@ public class GameView extends View implements SensorEventListener{
 				hitHeart(hearts.get(i));
 			}
 		}
-		
+				
+		if(shelter.enable){
+			if(Rect.intersects(rocketA.collisionRect, shelter.hitRect)){
+				hitRocketA(rocketA);
+			}
+			for(int i=0;i<rocketAs.size();i++){
+				if(Rect.intersects(rocketAs.get(i).collisionRect, shelter.hitRect)){
+					hitRocketA(rocketAs.get(i));
+				}
+			}
+			
+			if(Rect.intersects(rocketB.collisionRect, shelter.hitRect)){
+				hitRocketB(rocketB);
+			}
+			for(int i=0;i<rocketBs.size();i++){
+				if(Rect.intersects(rocketBs.get(i).collisionRect, shelter.hitRect)){
+					hitRocketB(rocketBs.get(i));
+				}
+			}
+		}
+		else{
+			if(Rect.intersects(rocketA.collisionRect, plane.collisionRect)){
+				hitRocketA(rocketA);
+			}
+			for(int i=0;i<rocketAs.size();i++){
+				if(Rect.intersects(rocketAs.get(i).collisionRect, plane.collisionRect)){
+					hitRocketA(rocketAs.get(i));
+				}
+			}
+			
+			if(Rect.intersects(rocketB.collisionRect, plane.collisionRect)){
+				hitRocketB(rocketB);
+			}
+			for(int i=0;i<rocketBs.size();i++){
+				if(Rect.intersects(rocketBs.get(i).collisionRect, plane.collisionRect)){
+					hitRocketB(rocketBs.get(i));
+				}
+			}
+		}
 	}
 	
 	public void hitRocketA(Rocket rocketA){
-		plane.Life --;		
+		if(!shelter.enable) plane.Life --;
 		rocketA.reset((int)plane.Y + plane.drawRect.height()/2);
 		C.score ++;
-		bangs.add(new Bang(rocketA.collisionRect.left, rocketA.collisionRect.centerY()));
+		bangs.add(SceneManager.newBang(rocketA.collisionRect.left, rocketA.collisionRect.centerY()));
 	}
 	
 	public void hitRocketB(RocketB rocketB){
-		plane.Life -= 2;
+		if(!shelter.enable) plane.Life -= 2;
 		rocketB.reset((int)plane.Y + plane.drawRect.height()/2);
 		C.score ++;
-		bangs.add(new Bang(rocketB.collisionRect.left, rocketB.collisionRect.centerY()));
+		bangs.add(SceneManager.newBang(rocketB.collisionRect.left, rocketB.collisionRect.centerY()));
 	}
 	
 	public void hitHeart(Heart heart){
@@ -577,14 +555,14 @@ public class GameView extends View implements SensorEventListener{
 		plane.Life -= 2;
 		cloud.reset();
 		C.score ++;
-		bangs.add(new Bang(cloud.collisionRect.left, cloud.collisionRect.centerY()));
+		bangs.add(SceneManager.newBang(cloud.collisionRect.left, cloud.collisionRect.centerY()));
 	}
 	
 	public void hitCactus(Cactus cactus){
 		plane.Life -= 1;
 //		cactus.reset();
 		C.score ++;
-		bangs.add(new Bang(cactus.collisionRect.centerX(), cactus.collisionRect.top));
+		bangs.add(SceneManager.newBang(cactus.collisionRect.centerX(), cactus.collisionRect.top));
 	}
 	
 	public void gameOver(){
@@ -632,16 +610,8 @@ public class GameView extends View implements SensorEventListener{
 	}
 	
 	public void release(){
-		Plane.release();
-		Rocket.release();
-		RocketB.release();
-		Cloud.release();
-		Cactus.release();
-		Heart.release();
-		Bang.release();		
-		Background.release();
-		StartStation.release();
-		EndStation.release();
+		BitmapManager.release();
+		Log.d("BitmapManager", "released");
 	}
 
 }

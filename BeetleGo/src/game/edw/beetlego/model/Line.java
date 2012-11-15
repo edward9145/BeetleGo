@@ -12,7 +12,7 @@ public class Line {
 	public Rect bmpRect = new Rect(0,0,683,37);
 	public Rect drawRect = new Rect(0,0,C.SCR_W,40);
 	public static int BMP_NUM = 3;
-	public static Bitmap bmp;
+	public Bitmap bmp;
 	
 	public Line(float y){
 		this.Y = y;

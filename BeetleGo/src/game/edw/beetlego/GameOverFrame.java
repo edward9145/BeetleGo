@@ -69,7 +69,7 @@ public class GameOverFrame extends Activity {
 		view.setEnabled(false);
 		
 		finish();
-		Intent intent = new Intent(GameOverFrame.this, GameFrame.class);
+		Intent intent = new Intent(GameOverFrame.this, LoadingFrame.class);
 		startActivity(intent);
 	}
 	

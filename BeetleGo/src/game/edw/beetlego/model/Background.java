@@ -22,14 +22,14 @@ public class Background {
 	public Rect drawRectCloud = new Rect(0,0,C.SCR_W, C.SCR_H);
 	
 	public static int BMP_NUM = 4;
-	public static Bitmap []bmp = new Bitmap[BMP_NUM];
+	public Bitmap []bmp = new Bitmap[BMP_NUM];
 	
 	public int GRASS_ID = 0;
 	public static int GRASS_NUM = 2;
-	public static Bitmap []bmpGrass = new Bitmap[GRASS_NUM];
+	public Bitmap []bmpGrass = new Bitmap[GRASS_NUM];
 	
 	public static int CLOUD_NUM = 2;
-	public static Bitmap[] bmpCloud = new Bitmap[CLOUD_NUM];
+	public Bitmap[] bmpCloud = new Bitmap[CLOUD_NUM];
 	public static float[] cloudSpeed = {1, 4, 4};
 	public static float[] cloudX = {C.SCR_W, C.SCR_W, C.SCR_W};
 	
@@ -37,7 +37,6 @@ public class Background {
 	public Rect[] drawCloudLeft = new Rect[CLOUD_NUM];
 	public Rect[] bmpCloudRight = new Rect[CLOUD_NUM];
 	public Rect[] drawCloudRight = new Rect[CLOUD_NUM];
-	
 	
 	
 	public Background(Bitmap[] bg, Bitmap[] grass, Bitmap[] cloud){
@@ -90,24 +89,24 @@ public class Background {
 		}
 	}
 	
-	public static void release(){
-		if(bmp == null) return;
-		for(int i=0; i<BMP_NUM; i++){
-			bmp[i].recycle();
-			bmp[i] = null;
-		}
-		bmp = null;
-		
-		for(int i=0; i<GRASS_NUM; i++){
-			bmpGrass[i].recycle();
-			bmpGrass[i] = null;
-		}
-		bmpGrass = null;
-		
-		for(int i=0; i<CLOUD_NUM; i++){
-			bmpCloud[i].recycle();
-			bmpCloud[i] = null;
-		}
-		bmpCloud = null;
-	}
+//	public static void release(){
+//		if(bmp == null) return;
+//		for(int i=0; i<BMP_NUM; i++){
+//			bmp[i].recycle();
+//			bmp[i] = null;
+//		}
+//		bmp = null;
+//		
+//		for(int i=0; i<GRASS_NUM; i++){
+//			bmpGrass[i].recycle();
+//			bmpGrass[i] = null;
+//		}
+//		bmpGrass = null;
+//		
+//		for(int i=0; i<CLOUD_NUM; i++){
+//			bmpCloud[i].recycle();
+//			bmpCloud[i] = null;
+//		}
+//		bmpCloud = null;
+//	}
 }

@@ -18,7 +18,7 @@ public class EndStation {
 	public Rect bmpRect = new Rect(0,0,640,320);
 	public Rect drawRect = new Rect(0,0, 150, 225);
 	
-	public static Bitmap bmp;
+	public Bitmap bmp;
 	
 	public EndStation(Bitmap b){
 		bmp = b;
@@ -40,9 +40,9 @@ public class EndStation {
 		}
 	}
 	
-	public static void release(){
-		if(bmp == null) return;
-		bmp.recycle();
-		bmp = null;
-	}
+//	public static void release(){
+//		if(bmp == null) return;
+//		bmp.recycle();
+//		bmp = null;
+//	}
 }

@@ -18,8 +18,8 @@ public class Cactus {
 	public Rect bmpRect = new Rect(0,0,42,98);
 	public Rect drawRect = new Rect(0,0,64,150);
 	public Rect collisionRect = new Rect(0,0,60,140);
-//	public static int BMP_NUM = 3;
-	public static Bitmap bmp;
+
+	public Bitmap bmp;
 	
 	public Cactus(float x, float y){
 		this.X = x;
@@ -63,9 +63,9 @@ public class Cactus {
 			update();
 	}
 	
-	public static void release(){
-		if(bmp == null) return;
-		bmp.recycle();
-		bmp = null;
-	}
+//	public static void release(){
+//		if(bmp == null) return;
+//		bmp.recycle();
+//		bmp = null;
+//	}
 }

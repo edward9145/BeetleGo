@@ -63,6 +63,10 @@ public class C {
 	public static double ACC_X_FACTOR = 25;
 	public static double ACC_Y_FACTOR = 20;
 	
+	public static final float SHIELD_SPEEDX = 12;
+	public static final float SHIELD_SPEEDY = 2;
+	public static final int SHELTER_TIME = 200;
+	
 	public static int RANK_NUM = 5;
 	public static String LAST_NAME = "player";
 	
