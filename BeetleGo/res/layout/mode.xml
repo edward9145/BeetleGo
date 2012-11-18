@@ -79,4 +79,13 @@
     	android:background="#00000000"
     	android:src="@drawable/btn_back" 
     	android:onClick="back_onclick" />	<!-- android:visibility="gone" -->
+     <ImageButton 
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_margin="@dimen/footer_margin"
+    	android:scaleType="fitCenter"
+    	android:layout_gravity="bottom|right"
+    	android:background="#00000000"
+    	android:src="@drawable/btn_how"
+    	android:onClick="toHow" />
 </FrameLayout>

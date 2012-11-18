@@ -6,7 +6,11 @@ import java.util.Random;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 
 public class Background {
 	
@@ -38,6 +42,13 @@ public class Background {
 	public Rect[] bmpCloudRight = new Rect[CLOUD_NUM];
 	public Rect[] drawCloudRight = new Rect[CLOUD_NUM];
 	
+	ColorMatrix cm = null;
+	Paint paint = new Paint(); // ÐÂ½¨paint
+
+	long dayTime = 0;
+	boolean isDay = true;
+	
+	final int MIDDLE_VALUE = 127;
 	
 	public Background(Bitmap[] bg, Bitmap[] grass, Bitmap[] cloud){
 		bmp = bg;
@@ -50,12 +61,15 @@ public class Background {
 		
 		bmpRectCloud = new Rect(0, 0, bmpCloud[0].getWidth(), bmpCloud[0].getHeight());
 		drawRectCloud = new Rect(0, 0, C.SCR_W, C.SCR_W * bmpCloud[0].getHeight() / bmpCloud[0].getWidth());
+		
+		if (null == cm) {
+			cm = new ColorMatrix();
+		}
 	}
 	
 	public void draw(Canvas canvas){
-		canvas.drawBitmap(bmp[ID/3], bmpRect0, drawRect0, null);
+		canvas.drawBitmap(bmp[ID/3], bmpRect0, drawRect0, paint);
 		canvas.drawBitmap(bmpGrass[GRASS_ID/3], bmpRectGrass, drawRectGrass, null);
-		
 	
 //		canvas.drawBitmap(bmpCloud[0], bmpRectCloud, drawRectCloud, null);
 		
@@ -87,26 +101,36 @@ public class Background {
 			bmpCloudLeft[i] = new Rect(0, 0, (int)((C.SCR_W-cloudX[i])*bmpRectCloud.width()/C.SCR_W) , bmpRectCloud.height());
 			bmpCloudRight[i] = new Rect((int)((C.SCR_W-cloudX[i])*bmpRectCloud.width()/C.SCR_W), 0, bmpRectCloud.width(), bmpRectCloud.height());
 		}
+		
+		
+		if(!C.hasDaynight) return;
+		// BG color will converted if daynight on
+		
+		if(isDay){
+			dayTime ++;
+			if(dayTime >= C.DAY_TIME) isDay = false;
+		}
+		else{
+			dayTime --;
+			if(dayTime <= 0) isDay = true;
+		}
+		
+		if(dayTime % 15 == 0){
+			float brightness = dayTime*C.NIGHT_BRIGHTNESS/C.DAY_TIME;
+//			float contrast = dayTime*C.NIGHT_CONTRAST/C.DAY_TIME;
+			setColorMatrix(cm, brightness);
+//			Log.d("DAYTIME", dayTime + " B:" + brightness);	
+			paint.setColorFilter(new ColorMatrixColorFilter(cm));
+		}
+		
 	}
+
+	private static void setColorMatrix(ColorMatrix cm, float brightness) {
+        cm.set(new float[] {
+               1, 0, 0, 0, brightness,
+               0, 1, 0, 0, brightness,
+               0, 0, 1, 0, brightness,
+               0, 0, 0, 1, 0 });
+    }
 	
-//	public static void release(){
-//		if(bmp == null) return;
-//		for(int i=0; i<BMP_NUM; i++){
-//			bmp[i].recycle();
-//			bmp[i] = null;
-//		}
-//		bmp = null;
-//		
-//		for(int i=0; i<GRASS_NUM; i++){
-//			bmpGrass[i].recycle();
-//			bmpGrass[i] = null;
-//		}
-//		bmpGrass = null;
-//		
-//		for(int i=0; i<CLOUD_NUM; i++){
-//			bmpCloud[i].recycle();
-//			bmpCloud[i] = null;
-//		}
-//		bmpCloud = null;
-//	}
 }

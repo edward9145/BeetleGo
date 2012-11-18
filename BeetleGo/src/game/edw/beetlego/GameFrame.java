@@ -1,5 +1,6 @@
 package game.edw.beetlego;
 
+import game.edw.beetlego.audio.AudioClip;
 import android.app.Activity;
 import android.content.Intent;
 import android.hardware.Sensor;
@@ -22,6 +23,10 @@ public class GameFrame extends Activity {
 	GameView gameView = null;
 	ImageButton ibPlay;
 	ImageButton ibReplay;
+	ImageButton ibShield;
+	ImageView ivShield0;
+	ImageView ivShield1;
+	
 	LinearLayout llGame;
 	ImageView []ivHeart = new ImageView[5];
 	ImageView []ivScore = new ImageView[6];
@@ -35,6 +40,7 @@ public class GameFrame extends Activity {
 	
 	int checkScore = C.score;
 	int checkLife = C.PLANE_LIFE;
+	int checkShield = 1;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,9 @@ public class GameFrame extends Activity {
         setContentView(R.layout.game);
         ibPlay = (ImageButton)findViewById(R.id.ibPlay);
         ibReplay = (ImageButton)findViewById(R.id.ibReplay);
+        ivShield0 = (ImageView)findViewById(R.id.ivShield0);
+        ivShield1 = (ImageView)findViewById(R.id.ivShield1);
+        ibShield = (ImageButton)findViewById(R.id.ibShield);
         
         sbStage = (SeekBar)findViewById(R.id.sbStage);
         sbStage.setEnabled(false);
@@ -129,11 +138,18 @@ public class GameFrame extends Activity {
 		gameView.updateInfo();
 		setSeekBar(0);
 		setPlayBtn();
+		setShield(gameView.shieldNum);
 		gameView.startTimer();
 	}
 	
 	public void play_onclick(View view){
 		setPlayBtn();
+	}
+	
+	public void shield_onclick(View view){
+		gameView.enableShelter();
+		setShield(gameView.shieldNum);
+		Log.d("SHELTER", "enable | SHIELD " + gameView.shieldNum);
 	}
 	
 	public void showMsg(final String s){
@@ -208,6 +224,35 @@ public class GameFrame extends Activity {
 		});
 	}
 	
+	public void setShield(final int shieldNum){
+		if(shieldNum == checkShield) return;
+		this.runOnUiThread(new Runnable() {
+			public void run(){
+				if(shieldNum == 0){
+					ivShield0.setVisibility(View.GONE);
+					ivShield1.setVisibility(View.GONE);
+					ibShield.setVisibility(View.GONE);
+				}
+				else if(shieldNum == 1){
+					ivShield0.setVisibility(View.GONE);
+					ivShield1.setVisibility(View.GONE);
+					ibShield.setVisibility(View.VISIBLE);
+				}
+				else if(shieldNum == 2){
+					ivShield0.setVisibility(View.GONE);
+					ivShield1.setVisibility(View.VISIBLE);
+					ibShield.setVisibility(View.VISIBLE);
+				}
+				else if(shieldNum == 3){
+					ivShield0.setVisibility(View.VISIBLE);
+					ivShield1.setVisibility(View.VISIBLE);
+					ibShield.setVisibility(View.VISIBLE);
+				}
+				checkShield = shieldNum;
+			}
+		});
+	}
+	
 	public void gameOver(){
 		hWait.postDelayed(new Runnable(){
         	@Override
@@ -245,4 +290,5 @@ public class GameFrame extends Activity {
 		gameView.stopTimer();
 		super.onBackPressed();
 	}
+
 }

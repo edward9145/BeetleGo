@@ -3,26 +3,51 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/menu_bg"
-    >
+    >	<!-- android:background="@drawable/menu_bg" -->
         
-    <ImageButton 
+    <ImageView 
+    	android:id="@+id/ivHow"
     	android:layout_width="fill_parent"
     	android:layout_height="fill_parent"
-    	android:scaleType="fitCenter"
-    	android:background="@drawable/how_fg"
+    	android:background="@drawable/how_moveup"
     	/>
     
     <ImageButton 
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_margin="@dimen/footer_margin"
+    	android:scaleType="fitCenter"
+    	android:layout_gravity="bottom|right"
+    	android:background="#00000000"
+    	android:src="@drawable/btn_back" 
+    	android:onClick="back_onclick" />
+    
+    <LinearLayout 
     	android:layout_width="120dp"
     	android:layout_height="60dp"
-    	android:src="@drawable/btn_menu"
-    	android:scaleType="fitCenter"
-    	android:background="#00000000"
-    	android:layout_gravity="bottom|left"
-    	android:layout_marginBottom="5dp"
-    	android:layout_marginLeft="5dp"
-    	android:onClick="toMenu"
-    	/>
-    	
+    	android:layout_gravity="right|top"
+    	android:gravity="center"
+    	android:orientation="horizontal"
+    	android:layout_marginRight="30dp"
+    	android:layout_marginTop="30dp"
+    	>
+	    <ImageButton
+	    	android:layout_weight="1"
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="50dp"
+	    	android:src="@drawable/prev"
+	    	android:scaleType="fitCenter"
+	    	android:background="#00000000"
+	    	android:onClick="prev_onclick"
+	    	/>
+	    <ImageButton
+    		android:layout_weight="1"
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="50dp"
+	    	android:src="@drawable/next"
+	    	android:scaleType="fitCenter"
+	    	android:background="#00000000"
+	    	android:onClick="next_onclick"
+	    	/>
+	</LinearLayout>
 </FrameLayout>

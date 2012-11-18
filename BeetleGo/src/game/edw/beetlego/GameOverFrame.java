@@ -1,5 +1,6 @@
 package game.edw.beetlego;
 
+import game.edw.beetlego.audio.AudioClip;
 import game.edw.beetlego.data.RankScore;
 import game.edw.beetlego.data.Storage;
 import android.app.Activity;
@@ -20,6 +21,7 @@ public class GameOverFrame extends Activity {
 	RankScore rankScore;
 	EditText etOverName;
 	LinearLayout llName;
+	AudioClip acBG = null;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,24 @@ public class GameOverFrame extends Activity {
         	showMsg("Congratulation! You are the " + (result+1) + " in TOP 5");
         else
         	llName.setVisibility(View.GONE);
+        
+        acBG = new AudioClip(this, R.raw.over);
 	}
 
+	@Override
+    protected void onResume(){
+		super.onResume();
+    	acBG.play(false);
+    }
+	
+	@Override
+	protected void onStop(){
+		super.onStop();
+		if(acBG != null){
+			acBG.freeMusic();
+		}
+	}
+	
 	public void saveScore_onclick(View view){
 		String name = etOverName.getText().toString();
 		Storage.saveScore(rankScore, C.score, name, this);

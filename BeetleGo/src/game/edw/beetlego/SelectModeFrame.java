@@ -1,5 +1,6 @@
 package game.edw.beetlego;
 
+import game.edw.beetlego.menu.HowFrame;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,5 +52,11 @@ public class SelectModeFrame extends Activity {
 	
 	public void back_onclick(View view){
 		finish();
+	}
+	
+	public void toHow(View view){
+		Intent intent = new Intent();
+		intent.setClass(SelectModeFrame.this, HowFrame.class);
+		startActivity(intent);
 	}
 }

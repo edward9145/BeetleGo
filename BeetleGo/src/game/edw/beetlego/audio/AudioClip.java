@@ -1,5 +1,6 @@
-package game.edw.beetlego;
+package game.edw.beetlego.audio;
 
+import game.edw.beetlego.C;
 import android.content.Context;
 import android.media.MediaPlayer;
 

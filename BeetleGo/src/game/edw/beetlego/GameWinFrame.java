@@ -1,5 +1,6 @@
 package game.edw.beetlego;
 
+import game.edw.beetlego.audio.AudioClip;
 import game.edw.beetlego.data.Config;
 import game.edw.beetlego.data.RankScore;
 import game.edw.beetlego.data.Storage;
@@ -22,6 +23,7 @@ public class GameWinFrame extends Activity {
 	RankScore rankScore;
 	EditText etWinName;
 	LinearLayout llName;
+	AudioClip acBG = null;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,9 +52,24 @@ public class GameWinFrame extends Activity {
         else
         	llName.setVisibility(View.GONE);
         
+        acBG = new AudioClip(this, R.raw.win);
         unlockStage();
 	}
 
+	@Override
+    protected void onResume(){
+		super.onResume();
+    	acBG.play(false);
+    }
+	
+	@Override
+	protected void onStop(){
+		super.onStop();
+		if(acBG != null){
+			acBG.freeMusic();
+		}
+	}
+	
 	public void saveScore_onclick(View view){
 		String name = etWinName.getText().toString();
 		C.LAST_NAME = name;

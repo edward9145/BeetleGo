@@ -7,6 +7,7 @@ public class C {
 	public static boolean hasSound = true;
 	public static boolean hasMusic = true;
 	public static boolean hasGravity = true;
+	public static boolean hasDaynight = false;
 	public static int SCR_W = 640;
 	public static int SCR_H = 480;
 	public static Rect SCR_RECT = new Rect(0, 0, 640, 480);
@@ -63,12 +64,23 @@ public class C {
 	public static double ACC_X_FACTOR = 25;
 	public static double ACC_Y_FACTOR = 20;
 	
-	public static final float SHIELD_SPEEDX = 12;
-	public static final float SHIELD_SPEEDY = 2;
-	public static final int SHELTER_TIME = 200;
+	public static final float SHIELD_MAXNUM = 3;
+	public static final float SHIELD_SPEEDX = 18;
+	public static final float SHIELD_SPEED_RADIUS = 50;
+	public static final float SHIELD_SPEED_ANGLE = 0.3f;
+	public static final float SHIELD_SPEED_SHAKE = 2f;
+	public static final int SHELTER_TIME = 150;
 	
-	public static int RANK_NUM = 5;
+	public static final long DAY_TIME = 800;
+	
+	public static final int NIGHT_HUE = 35;
+	public static final float NIGHT_CONTRAST = 0.6f;
+	public static final int NIGHT_SATURATION = 80;
+	public static final int NIGHT_BRIGHTNESS = -60;
+	
 	public static String LAST_NAME = "player";
+	public static final int RANK_NUM = 5;
+	public static final int HOW_NUM = 4;
 	
 	public static void initConfig(Config config){
     	C.STAGE_NUM = config.getTotalStage();

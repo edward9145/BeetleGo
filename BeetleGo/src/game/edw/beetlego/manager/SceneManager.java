@@ -1,6 +1,5 @@
 package game.edw.beetlego.manager;
 
-import android.graphics.Rect;
 import game.edw.beetlego.model.Background;
 import game.edw.beetlego.model.Bang;
 import game.edw.beetlego.model.Cactus;
@@ -13,6 +12,7 @@ import game.edw.beetlego.model.RocketB;
 import game.edw.beetlego.model.Shelter;
 import game.edw.beetlego.model.Shield;
 import game.edw.beetlego.model.StartStation;
+import android.graphics.Rect;
 
 public class SceneManager {
 	

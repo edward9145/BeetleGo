@@ -2,6 +2,7 @@ package game.edw.beetlego;
 
 import game.edw.beetlego.manager.BitmapManager;
 import game.edw.beetlego.manager.SceneManager;
+import game.edw.beetlego.manager.SoundManager;
 import game.edw.beetlego.model.Background;
 import game.edw.beetlego.model.Bang;
 import game.edw.beetlego.model.Cactus;
@@ -23,6 +24,7 @@ import java.util.TimerTask;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Paint.Align;
 import android.graphics.Rect;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -45,9 +47,8 @@ public class GameView extends View implements SensorEventListener{
 	float posY;
 	boolean isDown = false;
 	
-	int cloudX = 0;	
 	Timer updateTimer;
-	int mPeriod = 50;
+	int mPeriod = 48;
 	
 	Plane plane;
 //	Line line;
@@ -72,6 +73,7 @@ public class GameView extends View implements SensorEventListener{
 	Shield shield;
 	Shelter shelter = null;
 	
+	public int shieldNum = 1;
 	public int position = 0;
 	public int state = C.GAME_PAUSE;
 	
@@ -82,9 +84,14 @@ public class GameView extends View implements SensorEventListener{
 	int updateCactus = C.CACTUS_UPDATE;
 	int updateInc = C.UPDATE_INC;
 	
+	long lastTime = System.currentTimeMillis();
+	long currTime = System.currentTimeMillis();
+	int fps;
+	
 	public GameView(Context context){
 		super(context);
 		this.context = context;
+		
 //		initGame();
 //		startTimer();
 	}
@@ -99,6 +106,9 @@ public class GameView extends View implements SensorEventListener{
 	}
 	
 	protected void onDraw(Canvas canvas){
+//		Canvas canvas = getHolder().lockCanvas();
+		if(canvas == null) return;
+
 		if(state == C.GAME_START){
 			bg.draw(canvas);
 			startStation.draw(canvas);
@@ -190,6 +200,13 @@ public class GameView extends View implements SensorEventListener{
 			
 			canvas.drawRect(0, 0, C.SCR_W, C.SCR_H, grayPaint);
 		}
+
+		// show fps
+//		currTime = System.currentTimeMillis();
+//		fps = (int)(1000/(currTime - lastTime));
+//		lastTime = currTime;
+//		canvas.drawText("fps: " + fps, C.SCR_W, C.SCR_H, grayPaint);
+
 	}
 	
 	@Override
@@ -357,6 +374,7 @@ public class GameView extends View implements SensorEventListener{
 		C.score = 0;
 		this.state = C.GAME_START;
 		position = 0;
+		shieldNum = 1;
 		updateRocketA = C.ROCKETA_UPDATE;
 		updateRocketB = C.ROCKETB_UPDATE;
 		updateHeart = C.HEART_UPDATE;
@@ -373,6 +391,8 @@ public class GameView extends View implements SensorEventListener{
 		hearts = new ArrayList<Heart>(5);
 		
 		grayPaint.setColor(0x80000000);
+		grayPaint.setTextSize(20);
+		grayPaint.setTextAlign(Align.RIGHT);
 		
 		// TODO
 		plane = SceneManager.newPlane(C.SCR_W/3, 150);
@@ -458,9 +478,7 @@ public class GameView extends View implements SensorEventListener{
 	
 	public void checkCollision(){
 		if(Rect.intersects(shield.drawRect, plane.collisionRect)){
-			shield.reset();
-			shelter.enable = true;
-			shelter.update(plane.drawRect.centerX(), plane.drawRect.centerY());
+			addShield();
 		}
 		
 		if(Rect.intersects(cloud.collisionRect, plane.collisionRect)){
@@ -530,11 +548,30 @@ public class GameView extends View implements SensorEventListener{
 		}
 	}
 	
+	public void addShield(){
+		if(shieldNum < C.SHIELD_MAXNUM){
+			shieldNum ++;
+			shield.reset();
+			gameFrame.setShield(shieldNum);
+			Log.d("SHIELD", "" + shieldNum);
+		}
+	}
+	
+	public void enableShelter(){
+		if(shieldNum <= 0) return;
+		shieldNum --;
+//		shield.reset();
+		shelter.enable = true;
+		shelter.update(plane.drawRect.centerX(), plane.drawRect.centerY());
+		SoundManager.play("shelter");
+	}
+	
 	public void hitRocketA(Rocket rocketA){
 		if(!shelter.enable) plane.Life --;
 		rocketA.reset((int)plane.Y + plane.drawRect.height()/2);
 		C.score ++;
 		bangs.add(SceneManager.newBang(rocketA.collisionRect.left, rocketA.collisionRect.centerY()));
+		SoundManager.play("bang0");
 	}
 	
 	public void hitRocketB(RocketB rocketB){
@@ -542,6 +579,7 @@ public class GameView extends View implements SensorEventListener{
 		rocketB.reset((int)plane.Y + plane.drawRect.height()/2);
 		C.score ++;
 		bangs.add(SceneManager.newBang(rocketB.collisionRect.left, rocketB.collisionRect.centerY()));
+		SoundManager.play("bang1");
 	}
 	
 	public void hitHeart(Heart heart){
@@ -556,6 +594,7 @@ public class GameView extends View implements SensorEventListener{
 		cloud.reset();
 		C.score ++;
 		bangs.add(SceneManager.newBang(cloud.collisionRect.left, cloud.collisionRect.centerY()));
+		SoundManager.play("thunder");
 	}
 	
 	public void hitCactus(Cactus cactus){
@@ -563,6 +602,7 @@ public class GameView extends View implements SensorEventListener{
 //		cactus.reset();
 		C.score ++;
 		bangs.add(SceneManager.newBang(cactus.collisionRect.centerX(), cactus.collisionRect.top));
+		SoundManager.play("bang1");
 	}
 	
 	public void gameOver(){
@@ -597,7 +637,7 @@ public class GameView extends View implements SensorEventListener{
 				if(state == C.GAME_PLAY){
 					plane.Y += (cosX-C.ACC_X)*C.ACC_X_FACTOR;
 					plane.X += (cosY-C.ACC_Y)*C.ACC_Y_FACTOR;
-					int halfWidth = plane.drawRect.width()/2;
+					int halfWidth = plane.drawRect.width()/3;
 					if(plane.X > C.PLANE_POSX + halfWidth) plane.X = C.PLANE_POSX + halfWidth;
 					if(plane.X < C.PLANE_POSX - halfWidth) plane.X = C.PLANE_POSX - halfWidth;
 					
@@ -611,6 +651,7 @@ public class GameView extends View implements SensorEventListener{
 	
 	public void release(){
 		BitmapManager.release();
+		SoundManager.release();
 		Log.d("BitmapManager", "released");
 	}
 

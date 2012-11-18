@@ -2,7 +2,6 @@ package game.edw.beetlego.menu;
 
 import game.edw.beetlego.C;
 import game.edw.beetlego.R;
-import game.edw.beetlego.data.RankScore;
 import game.edw.beetlego.data.Storage;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -22,6 +21,7 @@ public class MenuFrame extends Activity {
 	ImageButton ibSound;
 	ImageButton ibMusic;
 	ImageButton ibGravity;
+	ImageButton ibDaynight;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class MenuFrame extends Activity {
         ibSound = (ImageButton)findViewById(R.id.ibSound);
         ibMusic = (ImageButton)findViewById(R.id.ibMusic);
         ibGravity = (ImageButton)findViewById(R.id.ibGravity);
+        ibDaynight = (ImageButton)findViewById(R.id.ibDaynight);
         
         ibMusic.setImageResource(C.hasMusic ? 
 				R.drawable.btn_musicon :
@@ -43,6 +44,9 @@ public class MenuFrame extends Activity {
         ibGravity.setImageResource(C.hasGravity ? 
 				R.drawable.btn_gravityon :
 				R.drawable.btn_gravityoff);
+        ibDaynight.setImageResource(C.hasDaynight ? 
+				R.drawable.btn_daynighton :
+				R.drawable.btn_daynightoff);
     }
 	
 	public void toHome(View view){
@@ -69,6 +73,13 @@ public class MenuFrame extends Activity {
 		ibGravity.setImageResource(C.hasGravity ? 
 					R.drawable.btn_gravityon :
 					R.drawable.btn_gravityoff);
+	}
+	
+	public void setDayNight(View view){
+		C.hasDaynight = !C.hasDaynight;
+		ibDaynight.setImageResource(C.hasDaynight ? 
+					R.drawable.btn_daynighton :
+					R.drawable.btn_daynightoff);
 	}
 	
 	public void toAchi(View view){

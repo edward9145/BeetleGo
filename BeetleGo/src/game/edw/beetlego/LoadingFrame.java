@@ -1,6 +1,7 @@
 package game.edw.beetlego;
 
 import game.edw.beetlego.manager.BitmapManager;
+import game.edw.beetlego.manager.SoundManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -28,6 +30,7 @@ public class LoadingFrame extends Activity {
 		
         setContentView(R.layout.loading);
         ivLoad_fg = (ImageView)findViewById(R.id.ivLoad_fg);
+        ivLoad_fg.setVisibility(View.INVISIBLE);
         ivLoading = (ImageView)findViewById(R.id.ivLoading);
         
         configResolution();
@@ -59,6 +62,8 @@ public class LoadingFrame extends Activity {
 	
 	public void loading(){
 		BitmapManager.loadBitmaps(this.getBaseContext());
+		SoundManager.loadSound(this.getBaseContext());
+		ivLoad_fg.setVisibility(View.VISIBLE);
 		finish();
 		Intent intent = new Intent(LoadingFrame.this, GameFrame.class);
 		startActivity(intent);
