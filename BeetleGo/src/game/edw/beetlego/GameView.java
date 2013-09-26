@@ -422,10 +422,13 @@ public class GameView extends View implements SensorEventListener{
 	}
 	
 	public void touchUpdate(){
+		// mode 1: press above or below the plane
+/*
 		if(!isDown){
 			plane.Acc = 0;
 			if(plane.SpeedY > C.ZERO) plane.SpeedY -= C.PLANE_DEC;
 			if(plane.SpeedY < -C.ZERO) plane.SpeedY += C.PLANE_DEC;
+
 //			Log.d("plane SpeedY", "" + plane.SpeedY);
 			return;
 		}
@@ -437,6 +440,14 @@ public class GameView extends View implements SensorEventListener{
 		else if(posY > plane.Y + plane.drawRect.height()/2){
 			plane.Acc = C.PLANE_ACC;
 			if(plane.SpeedY < 0) plane.Acc +=C.PLANE_DEC;
+		}
+*/
+		// mode 2: press against gravity
+		if(!isDown){
+			plane.Acc = C.GRAVITY;
+		}
+		else{
+			plane.Acc = -C.GRAVITY;
 		}
 	}
 	

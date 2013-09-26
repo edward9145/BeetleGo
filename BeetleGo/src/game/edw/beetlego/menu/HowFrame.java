@@ -11,9 +11,10 @@ import android.widget.ImageView;
 public class HowFrame extends Activity {
 	
 	ImageView ivHow;
-	int[] howRes = {
-			R.drawable.how_moveup, R.drawable.how_movedown, 
-			R.drawable.how_shield, R.drawable.how_score};
+	int[] howRes = 
+		{R.drawable.help0, R.drawable.help1};
+//		{	R.drawable.how_moveup, R.drawable.how_movedown, 
+//			R.drawable.how_shield, R.drawable.how_score};
 	int howId = 0;
 	
 	@Override

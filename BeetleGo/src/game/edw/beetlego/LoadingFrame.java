@@ -17,7 +17,7 @@ import android.widget.ImageView;
 public class LoadingFrame extends Activity {
 	
 	Handler hWait = new Handler();
-	long waitTime = 100;
+	long waitTime = 1000;
 	
 	ImageView ivLoad_fg;
 	ImageView ivLoading;

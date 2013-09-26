@@ -12,6 +12,7 @@ public class RocketB {
 	public float X = 0;
 	public float Y = 0;
 	public float Speed = C.ROCKETB_SPEEDX;
+	public float SpeedY = 0;
 	public float Acc = 0.3f;
 	public int ID = 0;
 	public Rect bmpRect = new Rect(0,0,85,36);
@@ -56,6 +57,8 @@ public class RocketB {
 		ID ++;
 		ID %= BMP_NUM;
 		X -= Speed;
+		SpeedY = (centerY - Y)/(X+C.PLANE_POSX) * Speed;
+		Y += SpeedY * 0.7;
 		Speed += Acc;
 		if(X < -drawRect.width()){
 			reset(centerY);
@@ -74,7 +77,7 @@ public class RocketB {
 		Random rand = new Random();
 		X = C.SCR_W + rand.nextInt(C.SCR_W);
 		int sign = (rand.nextInt()%2==0) ? 1:-1;
-		Y = center + sign * rand.nextInt(100);
+		Y = center + sign * rand.nextInt(150);
 		Speed = C.ROCKETA_SPEEDX;
 	}
 	

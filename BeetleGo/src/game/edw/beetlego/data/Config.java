@@ -7,15 +7,15 @@ public class Config implements Serializable {
 	private int totalStage = 2;
 	private boolean hasSound = true;
 	private boolean hasMusic = true;
-	private boolean hasGravity = true;
+	private boolean hasGravity = false;
 	private String lastName = "player";
 
 	public Config(){ }
-	public Config(int total, boolean sound, boolean music, boolean gravity, String name){
+	public Config(int total, boolean sound, boolean music, String name){
 		this.totalStage = total;
 		this.setHasSound(sound);
 		this.setHasMusic(music);
-		this.setHasGravity(gravity);
+//		this.setHasGravity(gravity);
 		this.setLastName(name);
 	}
 	

@@ -45,7 +45,16 @@ public class Plane {
 		
 		SpeedY += Acc;
 		if(SpeedY > 0 && SpeedY > C.PLANE_SPEEDY_MAX) SpeedY = C.PLANE_SPEEDY_MAX;
-		if(SpeedY < 0 && SpeedY < -C.PLANE_SPEEDY_MAX) SpeedY = -C.PLANE_SPEEDY_MAX;
+		if(SpeedY < 0 && SpeedY < -C.PLANE_SPEEDY_MAX) SpeedY = -C.PLANE_SPEEDY_MAX;		
+		if(Y > C.SCR_H - drawRect.height()){
+			Y = C.SCR_H - drawRect.height();
+			SpeedY = 0;
+		}
+		if(Y < 0){
+			Y = 0;
+			SpeedY = 0;
+		}
+		
 		Y += SpeedY;
 		
 		drawRect.offsetTo((int)X, (int)Y);

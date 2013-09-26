@@ -6,8 +6,9 @@ import android.graphics.Rect;
 public class C {
 	public static boolean hasSound = true;
 	public static boolean hasMusic = true;
-	public static boolean hasGravity = true;
+	public static boolean hasGravity = false;
 	public static boolean hasDaynight = false;
+	
 	public static int SCR_W = 640;
 	public static int SCR_H = 480;
 	public static Rect SCR_RECT = new Rect(0, 0, 640, 480);
@@ -53,7 +54,7 @@ public class C {
 	public static float PLANE_ACC = 1.0f;
 	public static float PLANE_DEC = 1.2f;
 	public static int PLANE_LIFE = 6;
-	public static int PLANE_MAXLIFE = 10;
+	public static int PLANE_MAXLIFE = 6;
 	public static float ZERO = 1e-5f;
 	
 	public static int score = 0;
@@ -82,11 +83,13 @@ public class C {
 	public static final int RANK_NUM = 5;
 	public static final int HOW_NUM = 4;
 	
+	public static final float GRAVITY = 1.8f;
+	
 	public static void initConfig(Config config){
     	C.STAGE_NUM = config.getTotalStage();
     	C.hasSound = config.isHasSound();
     	C.hasMusic = config.isHasMusic();
-    	C.hasGravity = config.isHasGravity();
+//    	C.hasGravity = config.isHasGravity();
     	C.LAST_NAME = config.getLastName();
     }
 }

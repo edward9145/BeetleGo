@@ -3,6 +3,7 @@ package game.edw.beetlego;
 import game.edw.beetlego.audio.AudioClip;
 import game.edw.beetlego.data.RankScore;
 import game.edw.beetlego.data.Storage;
+import game.edw.beetlego.menu.TopRankFrame;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -19,6 +20,7 @@ public class GameOverFrame extends Activity {
 	
 	TextView tvScore;
 	RankScore rankScore;
+	TextView tvOverName;
 	EditText etOverName;
 	LinearLayout llName;
 	AudioClip acBG = null;
@@ -34,6 +36,9 @@ public class GameOverFrame extends Activity {
         llName = (LinearLayout)findViewById(R.id.llOverNmae);
         
         Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/Bradley Hand ITC.TTF");
+        tvOverName = (TextView)findViewById(R.id.tvOverName);
+        tvOverName.setTypeface(typeFace, Typeface.BOLD);
+        
         etOverName = (EditText)findViewById(R.id.etOverName);
         etOverName.setText(C.LAST_NAME);
         etOverName.setTypeface(typeFace, Typeface.BOLD);
@@ -72,6 +77,11 @@ public class GameOverFrame extends Activity {
 		Storage.saveScore(rankScore, C.score, name, this);
 		C.LAST_NAME = name;
 		llName.setVisibility(View.GONE);
+		
+		finish();
+		Intent intent = new Intent();
+		intent.setClass(GameOverFrame.this, TopRankFrame.class);
+		startActivity(intent);
 	}
 	
 	public void showMsg(final String s){
@@ -94,4 +104,5 @@ public class GameOverFrame extends Activity {
 	public void back_onclick(View view){
 		finish();
 	}
+	
 }

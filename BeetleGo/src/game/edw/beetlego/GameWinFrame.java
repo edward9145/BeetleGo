@@ -103,7 +103,7 @@ public class GameWinFrame extends Activity {
 		C.STAGE_ID ++;
 		if(C.STAGE_ID > C.STAGE_NUM){
 			C.STAGE_NUM ++;
-			Storage.saveConfig(new Config(C.STAGE_NUM, C.hasSound, C.hasMusic, C.hasGravity, C.LAST_NAME), this);
+			Storage.saveConfig(new Config(C.STAGE_NUM, C.hasSound, C.hasMusic, C.LAST_NAME), this);
 		}
 		if(C.STAGE_ID > C.STAGE_MAX) C.STAGE_ID = C.STAGE_MAX;
 		if(C.STAGE_NUM > C.STAGE_MAX) C.STAGE_NUM = C.STAGE_MAX;
