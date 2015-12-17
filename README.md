@@ -13,3 +13,7 @@ https://play.google.com/store/apps/details?id=game.edw.beetlego
 You can also download the game and my other free apps here:
 http://edw.ap01.aws.af.cm/applist.php
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/edward9145/beetlego/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
